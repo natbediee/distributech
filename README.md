@@ -42,6 +42,34 @@ Trois vues principales facilitent l’analyse :
 
 ## 🚀 Installation
 Prérequis : **Python 3.12+**, **MySQL** installé et accessible.  
+Configurer la base dans .env (non versionné) avec les accès MySQL.
+
+▶️ Utilisation
+
+Lancer le processus ETL :
+
+python scripts/main_etl.py
+
+
+Consulter les résultats :
+
+Fichiers exportés dans data/stock/
+
+Tableau de bord en ligne de commande (scripts/query_menu.py)
+
+📑 Documentation
+
+Cahier des charges
+
+Dossier technique
+
+Planning Gantt
+
+
+
+📌 Auteur
+
+Projet réalisé par Nathalie Bediee dans le cadre de la formation Développeur IA – ISEN Brest.
 
 ```bash
 git clone https://github.com/natbediee/distributech.git
