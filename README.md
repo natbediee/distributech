@@ -48,7 +48,7 @@ Il permet d’interroger directement la base, de consulter les indicateurs :
 - Export CSV possible des résultats  
 
 ## 🚀 Installation
-1. Cloner le projet et préparer l’environnement Python
+**1. Cloner le projet et préparer l’environnement Python**
 ```bash
 git clone https://github.com/natbediee/distributech.git
 cd distributech
@@ -56,28 +56,30 @@ python3 -m venv .dtenv
 source .dtenv/bin/activate
 pip install -r requirements.txt
 ```
-3. Configurer les variables d’environnement
+**2. Configurer les variables d’environnement**
 
 Copier le modèle .env.example et compléter vos informations :
 ```bash
 cp .env.example .env
 ```
-3. Lancer l’infrastructure MySQL (Docker)
+**3. Lancer l’infrastructure MySQL (Docker)**
 ```bash
 docker compose -f bdd/docker-compose.yml up -d
 ```
 
 MySQL : localhost:3306
+
 Adminer : http://localhost:8080
 
-4. Créer la base SQLite locale
+**4. Créer la base SQLite locale**
 ```bash
-python scripts/db_stock.py
+python3 scripts/db_stock.py
 ```
 
-Cette base contient les référentiels (produits, régions, revendeurs) et les premiers mouvements de production.
+Cette base contient les référentiels (produits, régions, revendeurs) et les mouvements de production(produciton).
 
 ## 📂 Arborescence du projet
+```
 .
 ├── scripts/               
 │   ├── main_etl.py        # Pilotage global du processus ETL
@@ -109,21 +111,22 @@ Cette base contient les référentiels (produits, régions, revendeurs) et les p
 ├── .gitignore             
 ├── .env.example           
 └── .env                   # Variables locales (non versionné)
-
+```
 ## ▶️ Utilisation
 
 Lancer l’ETL complet :
+```bash
+python3 scripts/main_etl.py
+```
 
-python scripts/main_etl.py
-
-
-Consulter les résultats :
+Consulter les résultats dans  :
 
 Exports CSV générés dans data/stock/
 
-Tableau de bord interactif :
-
-python scripts/query_menu.py
+Pour lancer le Tableau de bord interactif :
+```bash
+python3 scripts/query_menu.py
+```
 
 ## 📑 Documentations
 
@@ -136,5 +139,7 @@ python scripts/query_menu.py
 ## 📌 Auteur
 
 Projet réalisé par **Nathalie Bediee** dans le cadre de la formation **Développeur IA – ISEN Brest**.
+
+🔗 [Mon profil LinkedIn](https://www.linkedin.com/in/nathalie-b%C3%A9di%C3%A9e-548652295/)
 
 
