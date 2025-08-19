@@ -5,15 +5,10 @@
 bdd/db/
 data/*
 !data/.gitkeep
-!data/in/.gitkeep
-!data/log/.gitkeep
-!data/stock/.gitkeep
-!data/treated/.gitkeep
+!data/*/.gitkeep
 
 # Fichiers sensibles
 .env
 
 # Python cache
 __pycache__/
-*.py[cod]
-*.pyo
