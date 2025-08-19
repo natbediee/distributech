@@ -52,7 +52,7 @@ def log_etl(type_evenement, source, message, data_log=DATA_LOG):
         "source":         source,
         "message":        message
     }])
-    row.to_csv(log_file, mode="a", index=False, header=header)
+    row.to_csv(log_file, mode="a", index=False, header=header,sep=';')
 
 def database_exists():
     try:

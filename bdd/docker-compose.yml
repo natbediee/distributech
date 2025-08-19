@@ -3,11 +3,11 @@ version: "3.9"
 services:
   db:
     image: mysql
-    container_name: db_cnn
+    container_name: db_distributech
     environment:
-      - MYSQL_ROOT_PASSWORD=example
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
     ports:
-      - 3306:3306
+      - ${MYSQL_PORT}:3306
     volumes:
       - ./db:/var/lib/mysql
     restart: always
@@ -17,4 +17,4 @@ services:
     container_name: adminer_cnn
     restart: always
     ports:
-      - 8080:8080
+      - ${ADMINER_PORT}:8080

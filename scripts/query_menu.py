@@ -119,7 +119,7 @@ def export_csv(df, filename):
     os.makedirs(DATA_STOCK, exist_ok=True)
     current_date = datetime.now().strftime("%Y-%m-%d_%H-%M")
     path = os.path.join(DATA_STOCK, f"{filename}_{current_date}.csv")
-    df.to_csv(path, index=False, encoding="utf-8")
+    df.to_csv(path, index=False, encoding="utf-8", sep=";")
     print(f"[INFO] Fichier exporté : {path}")
 
 #---------------
