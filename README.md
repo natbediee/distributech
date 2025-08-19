@@ -17,7 +17,7 @@ Projet pédagogique consistant à mettre en place un processus **ETL en Python**
 
 ## 📂 Sources de données
 - **Fichiers CSV hebdomadaires** : commandes envoyées par les revendeurs.
-- Exemple fichier `commande.csv` :
+- Exemple fichier `commandes_revendeur.csv` :
   ```csv
   numero_commande,commande_date,revendeur_id,region_id,product_id,quantity,unit_price
   CMD-20250710-001,2025-07-10,1,1,101,5,59.9
@@ -47,20 +47,31 @@ Il permet d’interroger directement la base, de consulter les indicateurs :
 - Chiffre d’affaires par région  
 - Export CSV possible des résultats  
 
+## 💻 Technologies utilisées
+
+- **Langage** : Python 3.x  
+- **Bibliothèques principales** :  
+  - pandas → traitement et transformation des données  
+  - mysql.connector → connexion et requêtes MySQL  
+  - sqlite3 → lecture de la base SQLite locale  
+- **Base relationnelle cible** : MySQL  
+- **Compatibilité OS** : Windows et Linux  
+- **Exécution** : mode batch (pipeline complet sans interaction utilisateur)  
+
 ## 🚀 Installation
 **1. Cloner le projet et préparer l’environnement Python**
 ```bash
 git clone https://github.com/natbediee/distributech.git
 cd distributech
-python3 -m venv .dtenv
-source .dtenv/bin/activate
+python3 -m venv .dtvenv
+source .dtvenv/bin/activate
 pip install -r requirements.txt
 ```
 **2. Configurer les variables d’environnement**
 
-Copier le modèle .env.example et compléter vos informations :
+Copier le modèle .env.template et compléter vos informations :
 ```bash
-cp .env.example .env
+cp .env.template .env
 ```
 **3. Lancer l’infrastructure MySQL (Docker)**
 ```bash
