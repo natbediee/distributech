@@ -51,59 +51,60 @@ python3 -m venv .dtenv
 source .dtenv/bin/activate
 pip install -r requirements.txt
 Configurer la base dans .env (non versionné) avec les accès MySQL.
+```
 
-📂 Arborescence du projet
-bash
-Copier
-Modifier
+## 📂 Arborescence du projet
+```bash
 .
 ├── scripts/               # Code Python (extract, transform, load, utils…)
-│   ├── main_etl.py
-│   ├── extract.py
-│   ├── transform.py
-│   ├── load.py
-│   └── query_menu.py
+│   ├── main_etl.py        # Pilotage global du processus ETL
+|   ├── db_sql.py          # Création de la base cible (si absente)
+│   ├── extract.py         # Extraction des données depuis CSV et SQLite
+│   ├── transform.py       # Nettoyage et validation des données
+|   ├── load.py            # Chargement dans la base centrale
+│   ├── post_etl.py        # Génération de l’état des stocks après ETL
+|   ├── query_menu.py      # Génère le tableau de Bord (interrogations SQL sur la base cible, affichage / reporting)
+│   └── commun.py          # Fonctions partagées (renommage, logs, vérification base, etc.)
+|
 ├── docs/                  # Documentation projet
 │   ├── CDC_Distributech_nbediee.pdf
 │   ├── DT_Distributech_nbediee.pdf
-│   ├── Distributech_Gantt_nbediee.pdf
-│   └── distributech.pdf
+│   └── Distributech_Gantt_nbediee.pdf
+|
 ├── requirements.txt       # Dépendances Python
 ├── README.md              # Documentation principale
 ├── .gitignore             # Exclusions Git
 └── .env                   # Variables d'environnement (non versionné)
-▶️ Utilisation
+```
+
+##  ▶️ Utilisation
 Activer l’environnement virtuel :
 
-bash
-Copier
-Modifier
-source .dtenv/bin/activate
+```bash
+source .dtvenv/bin/activate
+```
 Lancer le processus ETL :
 
-bash
-Copier
-Modifier
+```bash
 python scripts/main_etl.py
+```
 Consulter les résultats :
 
 Exports CSV générés dans data/stock/
 
 Tableau de bord interactif en ligne de commande :
 
-bash
-Copier
-Modifier
+```bash
 python scripts/query_menu.py
-📑 Documentation
-Cahier des charges
+```
+## 📑 Documentation
+- Cahier des charges
 
-Dossier technique
+- Dossier technique
 
 Planning Gantt
 
-Brief projet
 
-📌 Auteur
-Projet réalisé par Nathalie Bediee dans le cadre de la formation Développeur IA – ISEN Brest.
+## 📌 Auteur
+Projet réalisé par **Nathalie Bediee** dans le cadre de la formation **Développeur IA – ISEN Brest**.
 
