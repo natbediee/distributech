@@ -11,7 +11,7 @@ from dotenv import load_dotenv
 import subprocess
 import os
 
-load_dotenv()
+load_dotenv("../.env")
 DATA_LOG = os.getenv("DATA_LOG")
 
 #-------
@@ -53,6 +53,7 @@ def main():
         renamed_df=rename_columns(df,table)
         dict_data[table]=renamed_df
     print(f"-> Renommage noms tables et colonnes(voir log)\n")
+    log_etl("rename_ok", "global", "Tables et colonnes renommees", data_log=DATA_LOG)
     
     # 3 Transformation
     print("***** 2. Transformation des données ******")
@@ -61,6 +62,7 @@ def main():
     for table,df in dict_transformed.items():
         if len(df) > 0 :
             print(f"-> {table} : {len(df)} ligne(s) nettoyée(s).")
+            log_etl("transform_ok", table, f"{len(df)} lignes nettoyees", data_log=DATA_LOG) 
     for table, indices in rejected_indices.items():
         if len(indices) > 0:
             print(f"/!\\ {table} : {len(indices)} ligne(s) rejetée(s) (voir log)")
@@ -78,10 +80,12 @@ def main():
     load_results=load(non_empty_dict)
     for table,count in load_results.items():
         print(f"-> {table} : {count} ligne(s) ajoutée(s).")
+        log_etl("load_ok", table, f"{count} lignes inserees", data_log=DATA_LOG)
     print(f"Chargement terminé.\n")
 
     # 5 génération de l'état du stock
     run_post_etl()
+    
 
 
 if __name__ == "__main__":

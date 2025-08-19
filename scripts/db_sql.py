@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 #---------------
 # CONFIGURATION
 #---------------
-load_dotenv()
+load_dotenv("../.env")
 DB_HOST = os.getenv("DB_HOST")
 DB_ROOT = os.getenv("DB_ROOT")
 DB_ROOT_PSWD = os.getenv("DB_ROOT_PSWD")

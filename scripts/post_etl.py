@@ -4,6 +4,7 @@ import mysql.connector
 
 from datetime import datetime
 from dotenv import load_dotenv
+from commun import log_etl
 from commun import MYSQL_CONF
 from query_menu import query_menu
 
@@ -11,8 +12,9 @@ from query_menu import query_menu
 # CONFIGURATION
 #---------------
 
-load_dotenv()
+load_dotenv("../.env")
 DATA_STOCK = os.getenv("DATA_STOCK")
+DATA_LOG = os.getenv("DATA_LOG")
 
 # -- VUES SQL --
 
@@ -115,6 +117,7 @@ def state_stocks():
         df =pd.DataFrame(rows, columns=cols)
     except Exception as e :
         print(f"[ERREUR] Impossible de récupérer les données : {e}")
+        raise
     finally:
         try:
             cur.close()
@@ -140,8 +143,12 @@ def run_post_etl() :
     """
     Refresh vues globales,création CSV, alertes stock
     """
-    refresh_views()
-    state_stocks()
-    print("[OK] Fin ETL : vues à jour, CSV généré.")
-    query_menu()
+    try:
+        refresh_views()
+        state_stocks()
+        print("[OK] Fin ETL : vues à jour, CSV généré.")
+        query_menu()
+        log_etl("post_etl", "global", "Vues mises à jour et CSV stock généré", data_log=DATA_LOG)
     
+    except Exception as e:
+        log_etl("erreur", "post_etl", f"Post-ETL interrompu : {e}", data_log=DATA_LOG)

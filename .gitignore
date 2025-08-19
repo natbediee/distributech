@@ -1,10 +1,14 @@
 # Environnement virtuel
-.dtenv/
-.venv/
+.dtvenv/
 
 # Données locales
-bdd/
-data/
+bdd/db/
+data/*
+!data/.gitkeep
+!data/in/.gitkeep
+!data/log/.gitkeep
+!data/stock/.gitkeep
+!data/treated/.gitkeep
 
 # Fichiers sensibles
 .env
@@ -13,12 +17,3 @@ data/
 __pycache__/
 *.py[cod]
 *.pyo
-
-# Logs et temporaires
-*.log
-*.tmp
-
-# OS / IDE
-.vscode/
-.idea/
-.DS_Store

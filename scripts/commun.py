@@ -9,7 +9,7 @@ from datetime import datetime
 #---------------
 # CONFIGURATION
 #---------------
-load_dotenv()
+load_dotenv("../.env")
 
 DATA_LOG = os.getenv("DATA_LOG")
 

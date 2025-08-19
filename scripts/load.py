@@ -8,7 +8,7 @@ from commun import MYSQL_CONF
 from commun import EQUIVALENT_TABLES
 
 
-load_dotenv()
+load_dotenv("../.env")
 DATA_LOG = os.getenv("DATA_LOG")
 
 def load(dict_transformed):

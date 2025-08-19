@@ -8,7 +8,7 @@ import unidecode
 #---------------
 # CONFIGURATION
 #---------------
-load_dotenv()
+load_dotenv("../.env")
 DATA_IN        = os.getenv("DATA_IN")
 DATA_TREATED   = os.getenv("DATA_TREATED")
 DATA_LOG       = os.getenv("DATA_LOG")

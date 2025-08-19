@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 from datetime import datetime
 from commun import MYSQL_CONF
 
-load_dotenv()
+load_dotenv("../.env")
 DATA_STOCK = os.getenv("DATA_STOCK", "")
 
 #---------------
