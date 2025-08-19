@@ -1,0 +1,24 @@
+# Environnement virtuel
+.dtenv/
+.venv/
+
+# Données locales
+bdd/
+data/
+
+# Fichiers sensibles
+.env
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Logs et temporaires
+*.log
+*.tmp
+
+# OS / IDE
+.vscode/
+.idea/
+.DS_Store
