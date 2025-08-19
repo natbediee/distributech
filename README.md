@@ -6,6 +6,7 @@
 - [🛠️ Pipeline ETL](#️-pipeline-etl)
 - [🗄️ Base relationnelle](#️-base-relationnelle)
 - [📊 Tabeau de Bord](#-tableau-de-bord)
+- [🏗️ Architecture du projet](#-architecture-du-projet)
 - [🚀 Installation](#-installation)
 - [📂 Arborescence du projet](#-arborescence-du-projet)
 - [▶️ Utilisation](#️-utilisation)
@@ -45,7 +46,25 @@ Il permet d’interroger directement la base, de consulter les indicateurs :
 - Suivi des stocks globaux et par produit
 - Historique des commandes  
 - Chiffre d’affaires par région  
-- Export CSV possible des résultats  
+- Export CSV possible des résultats
+
+## 🏗️ Architecture du projet
+Le schéma ci-dessous illustre l’organisation générale du pipeline ETL et des flux de données :
+```mermaid
+flowchart TD
+  subgraph Sources
+    A1[CSV Commandes]
+    A2[Base SQLite<br>référentiels<br>+ production]
+  end
+
+  A1 --> B[ETL<br>Extract ⇒ Transform ⇒ Load]
+  A2 --> B
+
+  B --> C[Base de données cible]
+  B -.-> L[Journal des logs]
+  C --> D1[Stock en Export CSV]
+  C --> D2[Tableau de Bord de consultation]
+```
 
 ## 💻 Technologies utilisées
 
@@ -152,5 +171,3 @@ python3 scripts/query_menu.py
 Projet réalisé par **Nathalie Bediee** dans le cadre de la formation **Développeur IA – ISEN Brest**.
 
 🔗 [Mon profil LinkedIn](https://www.linkedin.com/in/nathalie-b%C3%A9di%C3%A9e-548652295/)
-
-
