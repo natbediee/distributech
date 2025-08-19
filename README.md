@@ -5,19 +5,24 @@
 - [📂 Sources de données](#-sources-de-données)
 - [🛠️ Pipeline ETL](#️-pipeline-etl)
 - [🗄️ Base relationnelle](#️-base-relationnelle)
-- [📊 Résultats](#-résultats)
+- [📊 Tabeau de Bord](#-tableau-de-bord)
 - [🚀 Installation](#-installation)
 - [📂 Arborescence du projet](#-arborescence-du-projet)
 - [▶️ Utilisation](#️-utilisation)
-- [📑 Documentation](#-documentation)
+- [📑 Documentations](#-documentations)
 - [📌 Auteur](#-auteur)
 
 ## 📖 Présentation
 Projet pédagogique consistant à mettre en place un processus **ETL en Python** pour centraliser les données de commandes et de stocks de l’entreprise fictive *Distributech*, grossiste en équipements électroniques.
 
 ## 📂 Sources de données
-- **Fichiers CSV hebdomadaires** : commandes envoyées par les revendeurs.  
-- **Base SQLite locale** : référentiels (produits, régions, revendeurs) et mouvements de production.  
+- **Fichiers CSV hebdomadaires** : commandes envoyées par les revendeurs.
+- Exemple fichier `commande.csv` :
+  ```csv
+  numero_commande,commande_date,revendeur_id,region_id,product_id,quantity,unit_price
+  CMD-20250710-001,2025-07-10,1,1,101,5,59.9
+  CMD-20250710-001,2025-07-10,1,1,102,10,19.9
+- **Base SQLite locale** : référentiels (produits, régions, revendeurs) et mouvements de production(production).  
 
 ## 🛠️ Pipeline ETL
 - **Extract** : lecture des fichiers CSV et de la base SQLite.  
@@ -35,76 +40,101 @@ Trois vues principales facilitent l’analyse :
 - `v_cmds_par_region` → commandes par région  
 - `v_chiffre_affaires_par_region` → chiffre d’affaires consolidé  
 
-## 📊 Résultats
-- Suivi des stocks globaux et par produit  
+## 📊 Tableau de bord
+Il permet d’interroger directement la base, de consulter les indicateurs :
+- Suivi des stocks globaux et par produit
 - Historique des commandes  
 - Chiffre d’affaires par région  
-- Export CSV et tableau de bord en ligne de commande  
+- Export CSV possible des résultats  
 
 ## 🚀 Installation
-Prérequis : **Python 3.12+**, **MySQL** installé et accessible.  
-
+1. Cloner le projet et préparer l’environnement Python
 ```bash
 git clone https://github.com/natbediee/distributech.git
 cd distributech
 python3 -m venv .dtenv
 source .dtenv/bin/activate
 pip install -r requirements.txt
-Configurer la base dans .env (non versionné) avec les accès MySQL.
+```
+3. Configurer les variables d’environnement
+
+Copier le modèle .env.example et compléter vos informations :
+```bash
+cp .env.example .env
+```
+3. Lancer l’infrastructure MySQL (Docker)
+```bash
+docker compose -f bdd/docker-compose.yml up -d
 ```
 
-## 📂 Arborescence du projet
+MySQL : localhost:3306
+Adminer : http://localhost:8080
+
+4. Créer la base SQLite locale
 ```bash
+python scripts/db_stock.py
+```
+
+Cette base contient les référentiels (produits, régions, revendeurs) et les premiers mouvements de production.
+
+## 📂 Arborescence du projet
 .
-├── scripts/               # Code Python (extract, transform, load, utils…)
+├── scripts/               
 │   ├── main_etl.py        # Pilotage global du processus ETL
-|   ├── db_sql.py          # Création de la base cible (si absente)
+│   ├── db_sql.py          # Création de la base MySQL (si absente)
+│   ├── db_stock.py        # Création de la base SQLite locale
 │   ├── extract.py         # Extraction des données depuis CSV et SQLite
 │   ├── transform.py       # Nettoyage et validation des données
-|   ├── load.py            # Chargement dans la base centrale
+│   ├── load.py            # Chargement dans la base centrale
 │   ├── post_etl.py        # Génération de l’état des stocks après ETL
-|   ├── query_menu.py      # Génère le tableau de Bord (interrogations SQL sur la base cible, affichage / reporting)
-│   └── commun.py          # Fonctions partagées (renommage, logs, vérification base, etc.)
-|
-├── docs/                  # Documentation projet
+│   ├── query_menu.py      # Tableau de bord SQL en ligne de commande
+│   └── commun.py          # Fonctions partagées (logs, vérifications…)
+│
+├── data/                  
+│   ├── in/                # Fichiers CSV d’entrée
+│   ├── log/               # Logs ETL
+│   ├── stock/             # Exports de stock générés
+│   └── treated/           # Fichiers CSV traités
+│
+├── docs/                  
 │   ├── CDC_Distributech_nbediee.pdf
 │   ├── DT_Distributech_nbediee.pdf
 │   └── Distributech_Gantt_nbediee.pdf
-|
-├── requirements.txt       # Dépendances Python
-├── README.md              # Documentation principale
-├── .gitignore             # Exclusions Git
-└── .env                   # Variables d'environnement (non versionné)
-```
+│
+├── bdd/
+│   └── docker-compose.yml # Services MySQL + Adminer
+│
+├── requirements.txt       
+├── README.md              
+├── .gitignore             
+├── .env.example           
+└── .env                   # Variables locales (non versionné)
 
-##  ▶️ Utilisation
-Activer l’environnement virtuel :
+## ▶️ Utilisation
 
-```bash
-source .dtvenv/bin/activate
-```
-Lancer le processus ETL :
+Lancer l’ETL complet :
 
-```bash
 python scripts/main_etl.py
-```
+
+
 Consulter les résultats :
 
 Exports CSV générés dans data/stock/
 
-Tableau de bord interactif en ligne de commande :
+Tableau de bord interactif :
 
-```bash
 python scripts/query_menu.py
-```
-## 📑 Documentation
+
+## 📑 Documentations
+
 - Cahier des charges
 
 - Dossier technique
 
-Planning Gantt
-
+- Planning Gantt
 
 ## 📌 Auteur
+
 Projet réalisé par **Nathalie Bediee** dans le cadre de la formation **Développeur IA – ISEN Brest**.
+
 
