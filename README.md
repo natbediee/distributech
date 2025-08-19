@@ -7,6 +7,7 @@
 - [🗄️ Base relationnelle](#️-base-relationnelle)
 - [📊 Résultats](#-résultats)
 - [🚀 Installation](#-installation)
+- [📂 Arborescence du projet](#-arborescence-du-projet)
 - [▶️ Utilisation](#️-utilisation)
 - [📑 Documentation](#-documentation)
 - [📌 Auteur](#-auteur)
@@ -42,34 +43,6 @@ Trois vues principales facilitent l’analyse :
 
 ## 🚀 Installation
 Prérequis : **Python 3.12+**, **MySQL** installé et accessible.  
-Configurer la base dans .env (non versionné) avec les accès MySQL.
-
-▶️ Utilisation
-
-Lancer le processus ETL :
-
-python scripts/main_etl.py
-
-
-Consulter les résultats :
-
-Fichiers exportés dans data/stock/
-
-Tableau de bord en ligne de commande (scripts/query_menu.py)
-
-📑 Documentation
-
-Cahier des charges
-
-Dossier technique
-
-Planning Gantt
-
-
-
-📌 Auteur
-
-Projet réalisé par Nathalie Bediee dans le cadre de la formation Développeur IA – ISEN Brest.
 
 ```bash
 git clone https://github.com/natbediee/distributech.git
@@ -77,4 +50,60 @@ cd distributech
 python3 -m venv .dtenv
 source .dtenv/bin/activate
 pip install -r requirements.txt
-# Distributech
+Configurer la base dans .env (non versionné) avec les accès MySQL.
+
+📂 Arborescence du projet
+bash
+Copier
+Modifier
+.
+├── scripts/               # Code Python (extract, transform, load, utils…)
+│   ├── main_etl.py
+│   ├── extract.py
+│   ├── transform.py
+│   ├── load.py
+│   └── query_menu.py
+├── docs/                  # Documentation projet
+│   ├── CDC_Distributech_nbediee.pdf
+│   ├── DT_Distributech_nbediee.pdf
+│   ├── Distributech_Gantt_nbediee.pdf
+│   └── distributech.pdf
+├── requirements.txt       # Dépendances Python
+├── README.md              # Documentation principale
+├── .gitignore             # Exclusions Git
+└── .env                   # Variables d'environnement (non versionné)
+▶️ Utilisation
+Activer l’environnement virtuel :
+
+bash
+Copier
+Modifier
+source .dtenv/bin/activate
+Lancer le processus ETL :
+
+bash
+Copier
+Modifier
+python scripts/main_etl.py
+Consulter les résultats :
+
+Exports CSV générés dans data/stock/
+
+Tableau de bord interactif en ligne de commande :
+
+bash
+Copier
+Modifier
+python scripts/query_menu.py
+📑 Documentation
+Cahier des charges
+
+Dossier technique
+
+Planning Gantt
+
+Brief projet
+
+📌 Auteur
+Projet réalisé par Nathalie Bediee dans le cadre de la formation Développeur IA – ISEN Brest.
+
