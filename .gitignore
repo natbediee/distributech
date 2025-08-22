@@ -4,18 +4,15 @@
 # Données locales
 bdd/db/
 
-# Ignorer tout le contenu sous data
-data/**
+# Ignorer tout le contenu de data
+data/*
 
-# Garder les dossiers pour permettre aux règles suivantes de matcher
-!data/
-!data/*/
-!data/**/*/
+# Réactiver le dossier test avec tout son contenu
+!data/test/
+!data/test/**
 
-# Garder les fichiers .gitkeep à tous les niveaux
-!data/.gitkeep
-!data/*/.gitkeep
-!data/**/*/.gitkeep
+# Garder uniquement les fichiers .gitkeep dans les autres sous-dossiers
+!data/**/.gitkeep
 
 # Fichiers sensibles
 .env
