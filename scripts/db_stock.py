@@ -1,7 +1,11 @@
 import sqlite3
+import os
 
-sqlite_path = "../data/base_stock.sqlite"
-conn = sqlite3.connect(sqlite_path)
+from dotenv import load_dotenv
+
+load_dotenv("../.env")
+SQLITE_DB_PATH = os.getenv("SQLITE_DB_PATH")
+conn = sqlite3.connect(SQLITE_DB_PATH)
 cur = conn.cursor()
 
 # Création des tables
@@ -94,5 +98,3 @@ cur.executemany("INSERT INTO production (product_id, quantity, date_production) 
 
 conn.commit()
 conn.close()
-
-sqlite_path

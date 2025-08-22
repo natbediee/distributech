@@ -1,0 +1,4 @@
+num_cmd,date,id_revendeur,id_pdt,quantite,prix_unitaire
+C101,2025-07-11,09,105,25,8.90
+C101,2025-07-11,9,102,2,13.50
+C102,2025-07-11,9,103,1,18.00

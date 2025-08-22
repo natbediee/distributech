@@ -1,8 +1,11 @@
 import sqlite3
 import os
+from dotenv import load_dotenv
 
-sqlite_path = "../data/base_stock.sqlite"
-conn = sqlite3.connect(sqlite_path)
+load_dotenv("../.env")
+SQLITE_DB_PATH = os.getenv("SQLITE_DB_PATH")
+
+conn = sqlite3.connect(SQLITE_DB_PATH)
 cur = conn.cursor()
 
 # Insertion des revendeurs
@@ -40,5 +43,4 @@ cur.executemany("INSERT INTO production (product_id, quantity, date_production) 
 conn.commit()
 conn.close()
 
-sqlite_path
-print("Base utilisée :", os.path.abspath(sqlite_path))
+print("Base utilisée :", os.path.abspath(SQLITE_DB_PATH))
