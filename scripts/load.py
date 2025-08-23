@@ -6,10 +6,7 @@ from dotenv import load_dotenv
 from commun import log_etl
 from commun import MYSQL_CONF
 from commun import EQUIVALENT_TABLES
-
-
-load_dotenv("../.env")
-DATA_LOG = os.getenv("DATA_LOG")
+from commun import DATA_LOG
 
 def load(dict_transformed):
 

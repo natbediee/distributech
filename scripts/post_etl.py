@@ -3,18 +3,11 @@ import pandas as pd
 import mysql.connector
 
 from datetime import datetime
-from dotenv import load_dotenv
 from commun import log_etl
 from commun import MYSQL_CONF
+from commun import DATA_STOCK
+from commun import DATA_LOG
 from query_menu import query_menu
-
-#---------------
-# CONFIGURATION
-#---------------
-
-load_dotenv("../.env")
-DATA_STOCK = os.getenv("DATA_STOCK")
-DATA_LOG = os.getenv("DATA_LOG")
 
 # -- VUES SQL --
 
@@ -129,6 +122,7 @@ def state_stocks():
     if not negatives.empty:
         print(f"\n[ALERTE] {len(negatives)} produit(s) avec stock négatif :")
         print(negatives.to_string(index=False))
+        log_etl("post_etl", "stock", f"{len(negatives)} produit(s) avec stock négatif", data_log=DATA_LOG)
     else:
         print("[INFO] Aucun stock négatif détecté.")
 
@@ -147,8 +141,8 @@ def run_post_etl() :
         refresh_views()
         state_stocks()
         print("[OK] Fin ETL : vues à jour, CSV généré.")
+        log_etl("post_etl", "global", "Vues mises a jour et CSV stock genere", data_log=DATA_LOG)
         query_menu()
-        log_etl("post_etl", "global", "Vues mises à jour et CSV stock généré", data_log=DATA_LOG)
     
     except Exception as e:
         log_etl("erreur", "post_etl", f"Post-ETL interrompu : {e}", data_log=DATA_LOG)

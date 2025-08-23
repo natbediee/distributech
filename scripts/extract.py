@@ -1,19 +1,18 @@
-import os
 import sqlite3
 import pandas as pd
-from commun import log_etl
-from dotenv import load_dotenv
+import os
 import unidecode
+
+from commun import log_etl
+from commun import DATA_IN
+from commun import DATA_LOG
+from commun import DATA_TREATED
+from commun import SQLITE_DB_PATH
 
 #---------------
 # CONFIGURATION
 #---------------
-load_dotenv("../.env")
-DATA_IN        = os.getenv("DATA_IN")
-DATA_TREATED   = os.getenv("DATA_TREATED")
-DATA_LOG       = os.getenv("DATA_LOG")
 
-SQLITE_DB_PATH = os.getenv("SQLITE_DB_PATH")
 TABLES_SQLITE  = ["produit", "region", "revendeur", "production"]
 TABLE_ID_COLUMNS = {"produit": "product_id","region": "region_id","revendeur": "revendeur_id","production": "production_id"}
 

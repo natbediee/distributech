@@ -1,9 +1,5 @@
 import sqlite3
-import os
-from dotenv import load_dotenv
-
-load_dotenv("../.env")
-SQLITE_DB_PATH = os.getenv("SQLITE_DB_PATH")
+from commun import SQLITE_DB_PATH
 
 conn = sqlite3.connect(SQLITE_DB_PATH)
 cur = conn.cursor()
@@ -43,4 +39,4 @@ cur.executemany("INSERT INTO production (product_id, quantity, date_production) 
 conn.commit()
 conn.close()
 
-print("Base utilisée :", os.path.abspath(SQLITE_DB_PATH))
+print("Base utilisée :", SQLITE_DB_PATH)

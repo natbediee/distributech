@@ -1,16 +1,13 @@
-import os
 import pandas as pd
 import mysql.connector
 
-from dotenv import load_dotenv
 from commun import log_etl
 from commun import MYSQL_CONF
+from commun import DATA_LOG
 
 #---------------
 # CONFIGURATION
 #---------------
-load_dotenv("../.env")
-DATA_LOG = os.getenv("DATA_LOG")
 
 SCHEMA_COLUMNS = {
     "regions" : {"id", "nom"},

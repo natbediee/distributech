@@ -1,3 +1,4 @@
+from db_sql import init_database
 from extract import extract
 from transform import transform
 from load import load
@@ -6,13 +7,10 @@ from commun import log_etl
 from commun import rename_tables
 from commun import rename_columns
 from commun import database_exists
-from dotenv import load_dotenv
+from commun import DATA_LOG
 
 import subprocess
 import os
-
-load_dotenv("../.env")
-DATA_LOG = os.getenv("DATA_LOG")
 
 #-------
 # MAIN
@@ -31,7 +29,7 @@ def main():
                 except Exception as e:  
                     print(f"[ERREUR] Suppression impossible pour {fname} : {e}")
         print("[INFO] Base à créer.")
-        subprocess.run(["python3", "db_sql.py"], check=True)
+        init_database()
         
     else:
         print(f"[INFO] Base déjà existante.\n")
@@ -65,7 +63,7 @@ def main():
             log_etl("transform_ok", table, f"{len(df)} lignes nettoyees", data_log=DATA_LOG) 
     for table, indices in rejected_indices.items():
         if len(indices) > 0:
-            print(f"/!\\ {table} : {len(indices)} ligne(s) rejetée(s) (voir log)")
+            print(f"[ALERTE] {table} : {len(indices)} ligne(s) rejetée(s) (voir log)")
     # vérification qu'il y a toujours des données
     non_empty_dict= {
         table:df for table,df in dict_transformed.items()

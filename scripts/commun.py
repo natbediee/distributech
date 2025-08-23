@@ -1,6 +1,7 @@
 import os
 import mysql.connector
 import pandas as pd
+from pathlib import Path
 
 from mysql.connector import Error
 from dotenv import load_dotenv
@@ -9,9 +10,26 @@ from datetime import datetime
 #---------------
 # CONFIGURATION
 #---------------
-load_dotenv("../.env")
 
-DATA_LOG = os.getenv("DATA_LOG")
+ROOT = Path(__file__).resolve().parents[1]
+load_dotenv(ROOT/".env")
+
+# chemin
+DATA_IN        = ROOT/os.getenv("DATA_IN")
+DATA_TREATED   = ROOT/os.getenv("DATA_TREATED")
+DATA_LOG       = ROOT/os.getenv("DATA_LOG")
+DATA_STOCK     = ROOT/os.getenv("DATA_STOCK")
+
+# sqlite
+SQLITE_DB_PATH = ROOT/os.getenv("SQLITE_DB_PATH")
+
+# base mysql
+DB_HOST = os.getenv("DB_HOST")
+DB_ROOT = os.getenv("DB_ROOT")
+DB_ROOT_PSWD = os.getenv("DB_ROOT_PSWD")
+DB_NAME = os.getenv("DB_NAME")
+DB_USER = os.getenv("DB_USER")
+DB_PSWD = os.getenv("DB_PSWD")
 
 MYSQL_CONF = {
     'host':     os.getenv('DB_HOST'),
@@ -74,7 +92,7 @@ def rename_tables(dict_data):
     for name, df in dict_data.items():
         target_name=EQUIVALENT_TABLES.get(name,name)
         if name != target_name:
-            log_etl("table renommée", name, f"{name} -> {target_name}",DATA_LOG)
+            log_etl("table renommee", name, f"{name} -> {target_name}",DATA_LOG)
         dict_dict_renamed[target_name]= df
     return dict_dict_renamed
 
