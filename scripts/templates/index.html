@@ -1,0 +1,17 @@
+{% extends 'base.html' %} 
+{% block content %} 
+  <div class="container container-narrow text-center py-4">
+    <h1 class="h-title text-brand">Tableau de Bord</h1>
+
+    <div class="hero mb-3">
+      <img src="{{ url_for('static', filename='images/logo.png') }}" alt="" class="d-block mx-auto w-50 img-fluid">
+      <img src="{{ url_for('static', filename='images/distri.jpg') }}" alt="Distributech" class="d-block mx-auto w-70 img-fluid">
+    </div>
+
+    <div class="buttons">
+      <a class="btn btn-outline-primary" href="{{ url_for('show_table', name='v_stock') }}">Stock</a>
+      <a class="btn btn-outline-primary" href="{{ url_for('show_table', name='v_cmds_par_region') }}">Commandes par région</a>
+      <a class="btn btn-outline-primary" href="{{ url_for('show_table', name='v_chiffre_affaires_par_region') }}">Chiffre d’affaires</a>
+    </div>
+  </div>
+{% endblock %}

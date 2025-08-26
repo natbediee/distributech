@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1 class="h-title">{% block title %}{{ title }}{% endblock %}</h1>
+
+  {% if columns and rows %}
+  <div class="table-responsive">
+    <table class="table table-sm table-striped">
+      <thead>
+        <tr>{% for c in columns %}<th>{{ c }}</th>{% endfor %}</tr>
+      </thead>
+      <tbody>
+        {% set has_stock = 'stock' in columns %}
+        {% for row in rows %}
+          <tr class="{% if has_stock and (row['stock']|float) < 0 %}table-danger{% endif %}">
+            {% for c in columns %}<td>{{ row[c] }}</td>{% endfor %}
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  
+  <p>{{ rows|length }} ligne(s).</p>
+  {% else %}
+    <p>Aucune donnée.</p>
+  {% endif %}
+{% endblock %}

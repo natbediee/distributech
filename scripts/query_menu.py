@@ -107,6 +107,12 @@ def display_df(df, title):
         print(df.to_string(index=False))
         print(f"\n{len(df)} ligne(s).")
 
+def format_float(x):
+    """Convertit un float en texte avec virgule comme séparateur décimal"""
+    if isinstance(x, float):
+        return str(x).replace('.', ',')
+    return x
+
 def export_csv(df, filename):
     if df is None:
         return
@@ -117,7 +123,7 @@ def export_csv(df, filename):
     os.makedirs(DATA_STOCK, exist_ok=True)
     current_date = datetime.now().strftime("%Y-%m-%d_%H-%M")
     path = os.path.join(DATA_STOCK, f"{filename}_{current_date}.csv")
-    df.to_csv(path, index=False, encoding="utf-8", sep=";")
+    df.to_csv(path, index=False, encoding="utf-8-sig", sep=";",decimal=",")
     print(f"[INFO] Fichier exporté : {path}")
 
 #---------------

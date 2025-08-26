@@ -130,7 +130,7 @@ def state_stocks():
     os.makedirs(DATA_STOCK, exist_ok=True)
     current_date = datetime.now().strftime("%Y-%m-%d_%H-%M")
     path = os.path.join(DATA_STOCK, f"etat_stocks_{current_date}.csv")
-    df.to_csv(path, index=False, encoding="utf-8", sep=";")
+    df.to_csv(path, index=False, encoding="utf-8-sig", sep=";", decimal=",")
     print(f"\n[INFO] Export état des stocks terminé : {path}")
 
 def run_post_etl() :

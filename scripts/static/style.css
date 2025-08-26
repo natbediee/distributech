@@ -1,0 +1,52 @@
+/* base */
+html,body{height:100%;}
+body{
+  margin:0;
+  background:#f7fafc;   /* fond */
+  color:#2d3748;        /* texte */
+}
+
+/* zone de contenu centrée */
+.main{
+  min-height:calc(100vh - 56px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+/* liens */
+a{ color:#0aa4a1; text-decoration:none; }
+a:hover{ color:#088988; text-decoration:underline; }
+
+/* identité */
+.navbar-brand{ font-weight:600; }
+.bg-brand{ background:#1e6fae; }
+.text-brand{ color:#1e6fae; }
+.navbar-light .navbar-brand,
+.navbar-light .navbar-brand:visited{
+  color:#1e6fae !important;
+}
+.navbar-light .navbar-brand:hover{ color:#0aa4a1 !important; }
+
+/* helpers */
+.container-narrow{ max-width:820px; margin:0 auto; }
+.h-title{
+    background:#eef6fc; border:1px solid #e3edf5; border-radius:12px;
+    color :#1e6fae;
+    padding:8px 16px; 
+    display:inline-block;
+    text-align: center;
+    display: inline-block;   /* largeur = au texte */
+    margin: 0 auto 12px;     /* centre le bloc */
+}
+.hero img{
+  max-width:420px; width:100%; height:auto; border-radius:12px;
+  display:block; margin:0 auto;
+}
+.buttons{ display:flex; flex-wrap:wrap; justify-content:center; gap:12px; }
+
+/* tables */
+table{ width:100%; border-collapse:collapse; margin-top:20px; background:#fff; border-radius:12px; overflow:hidden; }
+th,td{ border:1px solid #ddd; padding:8px; text-align:left; }
+th{ background:#f2f2f2; }
