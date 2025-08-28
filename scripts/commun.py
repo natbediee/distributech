@@ -51,6 +51,14 @@ COLUMN_EQUIVALENTS = {
     'production' :{'production_id':'id','product_id':'id_pdt','quantity':'quantite','date_production':'date'},
 }
 
+SCHEMA_COLUMNS = {
+    "regions" : {"id", "nom"},
+    "revendeurs": {"id", "nom", "id_region"},
+    "produits": {"id_src", "nom", "cout_unitaire"},
+    "production": {"id", "id_pdt", "date", "quantite"},
+    "commandes": {"num_cmd", "date", "id_revendeur","id_pdt", "quantite", "prix_unitaire"}
+}
+
 #---------------
 # FONCTIONS
 #---------------

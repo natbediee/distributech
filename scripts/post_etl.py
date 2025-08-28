@@ -122,7 +122,7 @@ def state_stocks():
     if not negatives.empty:
         print(f"\n[ALERTE] {len(negatives)} produit(s) avec stock négatif :")
         print(negatives.to_string(index=False))
-        log_etl("post_etl", "stock", f"{len(negatives)} produit(s) avec stock négatif", data_log=DATA_LOG)
+        log_etl("post_etl", "stock", f"{len(negatives)} produit(s) avec stock negatif", data_log=DATA_LOG)
     else:
         print("[INFO] Aucun stock négatif détecté.")
 

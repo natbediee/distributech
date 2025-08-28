@@ -4,18 +4,12 @@ import mysql.connector
 from commun import log_etl
 from commun import MYSQL_CONF
 from commun import DATA_LOG
+from commun import SCHEMA_COLUMNS
 
 #---------------
 # CONFIGURATION
 #---------------
 
-SCHEMA_COLUMNS = {
-    "regions" : {"id", "nom"},
-    "revendeurs": {"id", "nom", "id_region"},
-    "produits": {"id_src", "nom", "cout_unitaire"},
-    "production": {"id", "id_pdt", "date", "quantite"},
-    "commandes": {"num_cmd", "date", "id_revendeur","id_pdt", "quantite", "prix_unitaire"}
-}
 SCHEMA_COLUMN_TYPES = {
     "production": (["date"], ["quantite"]),
     "commandes": (["date"], ["quantite", "prix_unitaire"]),

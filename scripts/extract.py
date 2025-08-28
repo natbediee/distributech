@@ -8,6 +8,7 @@ from commun import DATA_IN
 from commun import DATA_LOG
 from commun import DATA_TREATED
 from commun import SQLITE_DB_PATH
+from commun import SCHEMA_COLUMNS
 
 #---------------
 # CONFIGURATION
@@ -33,9 +34,6 @@ mapping_csv_to_cible = {
     # prix unitaire
     "unit_price": "prix_unitaire","prix_unitaire": "prix_unitaire","prix unitaire": "prix_unitaire","prix": "prix_unitaire","pu": "prix_unitaire","unit cost": "prix_unitaire"
 }
-SCHEMA_COLUMNS = {
-            "num_cmd", "date", "id_revendeur", "id_pdt", "quantite", "prix_unitaire"
-        }
 
 #--------------------
 # FONCTION PRINCIPALE
@@ -100,8 +98,21 @@ def extract_from_csv(data_in, data_treated, data_log):
 
         # 2. Mapping des colonnes
         df.rename(columns=mapping_csv_to_cible, inplace=True)
+
+        # 3. Vérification structure (colonnes attendues)
+        expected_columns = SCHEMA_COLUMNS.get("commandes", set())
+        missing = expected_columns - set(df.columns)
+        if missing:
+            log_etl("structure", file, f"Colonnes manquantes: {sorted(missing)}", data_log)
+            print(f"[ALERTE] {file} -> Colonnes manquantes: {sorted(missing)}")
+            move_file(path, data_treated)
+            continue
+        
+        # 4. Ajout des colonnes de suivi
         df['source_file'] = file
         df['source_idx']=df.index+1
+
+
         all_rows.append(df)
         log_etl("lecture_ok", file, f"{len(df)} lignes a traiter", data_log)
         move_file(path, data_treated)
