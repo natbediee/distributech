@@ -37,13 +37,13 @@ def ask_period_build_where():
         print("\n/!\\ Vous devez saisir au moins une date (début ou fin).")
         return None
 
-    # Validation format si fourni
+    # Validation format
     if start_date and not is_iso_date(start_date):
         return None
     if end_date and not is_iso_date(end_date):
         return None
 
-    # Inversion si besoin (si les deux sont présentes)
+    # Inversion date si start_date > end_date
     if start_date and end_date:
         d1 = datetime.strptime(start_date, "%Y-%m-%d").date()
         d2 = datetime.strptime(end_date,   "%Y-%m-%d").date()
@@ -53,13 +53,16 @@ def ask_period_build_where():
             start_date = d1.strftime("%Y-%m-%d")
             end_date   = d2.strftime("%Y-%m-%d")
 
-    # WHERE (fin inclusive, plus naturel pour l'utilisateur)
+    # WHERE
     parts = []
     if start_date:
         parts.append(f"c.date >= '{start_date}'")
     if end_date:
         parts.append(f"c.date <= '{end_date}'")
-    where_sql = "WHERE " + " AND ".join(parts) if parts else ""
+    if parts:
+        where_sql = "WHERE " + " AND ".join(parts)
+    else:
+        where_sql = ""
 
     # Tags pour titre + nom de fichier
     if start_date and not end_date:
@@ -120,6 +123,10 @@ def export_csv(df, filename):
     if confirm not in ("o", "oui"):
         print("[INFO] Export annulé.")
         return
+    # Conversion uniquement sur les colonnes numériques
+    float_cols = df.select_dtypes(include=["float", "float64"]).columns
+    df[float_cols] = df[float_cols].applymap(format_float)
+    
     os.makedirs(DATA_STOCK, exist_ok=True)
     current_date = datetime.now().strftime("%Y-%m-%d_%H-%M")
     path = os.path.join(DATA_STOCK, f"{filename}_{current_date}.csv")
