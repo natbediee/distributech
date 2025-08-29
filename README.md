@@ -3,14 +3,16 @@
 ## 📑 Sommaire
 - [📖 Présentation](#-présentation)
 - [📂 Sources de données](#-sources-de-données)
-- [🛠️ Pipeline ETL](#️-pipeline-etl)
-- [🗄️ Base relationnelle](#️-base-relationnelle)
+- [🛠️ Pipeline ETL](#-pipeline-etl)
+- [🗄️ Base relationnelle](#-base-relationnelle)
 - [📊 Tabeau de Bord](#-tableau-de-bord)
 - [🏗️ Architecture du projet](#-architecture-du-projet)
 - [🚀 Installation](#-installation)
 - [📂 Arborescence du projet](#-arborescence-du-projet)
-- [▶️ Utilisation](#️-utilisation)
+- [▶️ Utilisation](#-utilisation)
+- [🧪 Tests](#-tests)
 - [📑 Documentations](#-documentations)
+  
 - [📌 Auteur](#-auteur)
 
 ## 📖 Présentation
@@ -143,6 +145,49 @@ Pour lancer le Tableau de bord interactif :
 ```bash
 python3 scripts/query_menu.py
 ```
+## 🧪 Tests
+
+Des scripts et jeux de données dédiés permettent de valider le bon fonctionnement du pipeline ETL.
+
+Scripts
+
+db_stock_add.py : alimente la base SQLite locale avec de nouvelles entrées de test (produits, revendeurs, mouvements de production).
+Utile pour simuler l’arrivée de données supplémentaires et vérifier l’intégration dans la base MySQL.
+
+Jeux de données
+
+Le répertoire data/test/ contient 13 fichiers CSV représentatifs de différents cas :
+
+commandes valides,
+
+données incomplètes,
+
+doublons,
+
+incohérences de clés étrangères.
+
+Objectifs
+
+Vérifier la robustesse du processus Extract → Transform → Load.
+
+Valider la gestion des erreurs et le logging.
+
+Contrôler que les exports de stock générés correspondent à l’attendu après traitement.
+
+Exécution
+
+Pour lancer un test :
+
+# Exemple : exécution de l’ETL sur les fichiers de test
+cp data/test/*.csv data/in/
+python3 scripts/main_etl.py
+
+
+Les résultats sont disponibles dans :
+
+data/log/ pour les traces ETL,
+
+data/stock/ pour les exports générés.
 
 ## 📑 Documentations
 
@@ -151,6 +196,8 @@ python3 scripts/query_menu.py
 - Dossier technique
 
 - Planning Gantt
+
+- Présentation du projet
 
 ## 📌 Auteur
 
