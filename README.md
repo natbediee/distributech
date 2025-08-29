@@ -157,37 +157,24 @@ Utile pour simuler l’arrivée de données supplémentaires et vérifier l’in
 Jeux de données
 
 Le répertoire data/test/ contient 13 fichiers CSV représentatifs de différents cas :
-
-commandes valides,
-
-données incomplètes,
-
-doublons,
-
-incohérences de clés étrangères.
-
-Objectifs
-
-Vérifier la robustesse du processus Extract → Transform → Load.
-
-Valider la gestion des erreurs et le logging.
-
-Contrôler que les exports de stock générés correspondent à l’attendu après traitement.
-
-Exécution
+  commandes valides,
+  données incomplètes,
+  doublons,
+  incohérences de clés étrangères,
+  Objectifs
 
 Pour lancer un test :
 
-# Exemple : exécution de l’ETL sur les fichiers de test
+Exemple : exécution de l’ETL sur les fichiers de test
+```bash
 cp data/test/*.csv data/in/
 python3 scripts/main_etl.py
-
+```
 
 Les résultats sont disponibles dans :
 
-data/log/ pour les traces ETL,
-
-data/stock/ pour les exports générés.
+  data/log/ pour les traces ETL,
+  data/stock/ pour les exports générés.
 
 ## 📑 Documentations
 
