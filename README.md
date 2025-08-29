@@ -51,21 +51,6 @@ Il permet d’interroger directement la base, de consulter les indicateurs :
 ## 🏗️ Architecture du projet
 Le schéma ci-dessous illustre l’organisation générale du pipeline ETL et des flux de données :
 ![ETL](scripts/static/images/ETL.JPG)
-```mermaid
-flowchart TD
-  subgraph Sources
-    A1[CSV Commandes]
-    A2[Base SQLite<br>référentiels<br>+ production]
-  end
-
-  A1 --> B[ETL<br>Extract ⇒ Transform ⇒ Load]
-  A2 --> B
-
-  B --> C[Base de données cible]
-  B -.-> L[Journal des logs]
-  C --> D1[Stock en Export CSV]
-  C --> D2[Tableau de Bord de consultation]
-```
 
 ## 💻 Technologies utilisées
 
