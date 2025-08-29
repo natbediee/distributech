@@ -50,6 +50,7 @@ Il permet d’interroger directement la base, de consulter les indicateurs :
 
 ## 🏗️ Architecture du projet
 Le schéma ci-dessous illustre l’organisation générale du pipeline ETL et des flux de données :
+![ETL](scripts/static/images/ETL.JPG)
 ```mermaid
 flowchart TD
   subgraph Sources
